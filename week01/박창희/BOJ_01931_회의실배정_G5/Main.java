@@ -1,5 +1,3 @@
-package algorithm.Greedy.BOJ_01931_회의실배정_G5;
-
 import java.io.*;
 import java.util.*;
 
@@ -31,7 +29,7 @@ public class Main {
             Time currentPq = pq.poll();
             // System.out.println("value : " + currentPq.start + " " + currentPq.end);
 
-            if (currentPq.start > prevEndTime) {
+            if (currentPq.start >= prevEndTime) {
                 // System.out.println("find!");
                 count++;
                 prevEndTime = currentPq.end;
