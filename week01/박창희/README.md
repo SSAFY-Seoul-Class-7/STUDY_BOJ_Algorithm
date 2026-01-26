@@ -1,4 +1,4 @@
-
+# [백준 1931번 - 회의실 배정](https://www.acmicpc.net/problem/1931)
 
 ### 💡 핵심 아이디어 & 알고리즘
 - **알고리즘:** Greedy (그리디), 정렬 (Sorting)
@@ -13,11 +13,9 @@
 ### 🚩 실수했던 점 / 오답 원인 (Trial & Error)
     너무많음 오래 걸렷음 풀이시간 40분.. 생각이 안남
 
---
+---
 
-### 🔗 문제 링크
-
-- [백준 1939번 - 중량제한](https://www.acmicpc.net/problem/1939)
+# [백준 1939번 - 중량제한](https://www.acmicpc.net/problem/1939)
 
 ### 💡 핵심 아이디어 & 알고리즘
 
