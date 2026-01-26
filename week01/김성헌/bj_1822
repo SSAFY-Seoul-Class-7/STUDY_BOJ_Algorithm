@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st=new StringTokenizer(br.readLine());
+
+        int a=Integer.parseInt(st.nextToken());
+        int b=Integer.parseInt(st.nextToken());
+
+        Set<Integer> set=new HashSet<>();
+        Set<Integer> set2=new HashSet<>();
+
+
+        st=new StringTokenizer(br.readLine());
+        for (int i = 0; i <a ; i++) {
+            set.add(Integer.parseInt(st.nextToken()));
+        }
+
+        st=new StringTokenizer(br.readLine());
+        for (int i = 0; i <b; i++) {
+            set2.add(Integer.parseInt(st.nextToken()));
+        }
+
+        List<Integer> list=new ArrayList<>();
+        for(int curr: set){
+            if(!set2.contains(curr)){
+                list.add(curr);
+            }
+        }
+
+        Collections.sort(list);
+        StringBuilder sb=new StringBuilder();
+        sb.append(list.size()).append('\n');
+
+        for (int i = 0; i <list.size() ; i++) {
+            sb.append(list.get(i)).append(' ');
+        }
+
+        System.out.println(sb);
+    }
+}
