@@ -1,4 +1,3 @@
-package week05.박창희;
 
 import java.io.*;
 import java.util.*;
@@ -27,8 +26,8 @@ public class BOJ_01493 {
         }
     }
 
-    static void init() throws IOException{
-        st = new StringTokenizer(br.readLine()," ");
+    static void init() throws IOException {
+        st = new StringTokenizer(br.readLine(), " ");
         length = Integer.parseInt(st.nextToken());
         width = Integer.parseInt(st.nextToken());
         height = Integer.parseInt(st.nextToken());
@@ -36,22 +35,24 @@ public class BOJ_01493 {
         type = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < type; i++) {
-            st = new StringTokenizer(br.readLine()," ");
+            st = new StringTokenizer(br.readLine(), " ");
             int num = Integer.parseInt(st.nextToken());
             int count = Integer.parseInt(st.nextToken());
             cubes[num] = count;
         }
     }
 
-    static void solve(long l, long w, long h){
-        if (l == 0 || w == 0 || h == 0) return; 
+    static void solve(long l, long w, long h) {
+        if (l == 0 || w == 0 || h == 0)
+            return;
 
         boolean placed = false;
 
         for (int i = 19; i >= 0; i--) {
-            if (cubes[i] == 0) continue;
+            if (cubes[i] == 0)
+                continue;
 
-            long S = 1L << i; 
+            long S = 1L << i;
             if (S <= l && S <= w && S <= h) {
                 cubes[i]--;
                 answer++;
@@ -61,7 +62,7 @@ public class BOJ_01493 {
                 solve(l, w - S, S);
                 solve(l, w, h - S);
 
-                return; 
+                return;
             }
         }
 

@@ -1,24 +1,23 @@
-package week05.박창희;
 
 import java.io.*;
 import java.util.*;
 
-public class BOJ_01074  {
+public class BOJ_01074 {
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    
+
     static int N, r, c;
     static int count = 0; // 방문 순서를 누적할 변수
 
     public static void main(String[] args) throws IOException {
         init();
-        
+
         // 배열의 한 변의 길이: 2^N
         int size = (int) Math.pow(2, N);
-        
+
         findZ(size, r, c);
-        
+
         // 결과 출력
         System.out.println(count);
     }
