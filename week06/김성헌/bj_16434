@@ -1,0 +1,58 @@
+import java.util.*;
+import java.io.*;
+
+public class bj_16434{
+    private static int n;
+    private static long hAtk;
+    private static int[][] rooms;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st=new StringTokenizer(br.readLine());
+
+        n=Integer.parseInt(st.nextToken());
+        hAtk=Integer.parseInt(st.nextToken());
+
+        rooms= new int[n][3];
+
+        for (int i = 0; i < n; i++) {
+            st=new StringTokenizer(br.readLine());
+            rooms[i][0]=Integer.parseInt(st.nextToken());
+            rooms[i][1]=Integer.parseInt(st.nextToken());
+            rooms[i][2]=Integer.parseInt(st.nextToken());
+        }
+        long lo=-1;
+        long hi=Long.MAX_VALUE;
+        while(lo+1<hi) {
+            long mid = (lo + hi) / 2;
+            if (check(mid)) {
+                hi = mid;
+            } else {
+                lo = mid;
+            }
+        }
+        System.out.println(hi);
+    }
+    // 이길 수 있는지 체크하기
+    private static boolean check(long max){
+        long curHp=max;
+        long curAtk=hAtk;
+
+        for (int i = 0; i <n ; i++) {
+            int type=rooms[i][0];
+            int a=rooms[i][1];
+            int h=rooms[i][2];
+
+            if(type==1){
+                long cnt=(h+curAtk-1)/curAtk;
+                curHp-=a*(cnt-1);
+                if(curHp<=0) return false;// 죽음
+            }else{
+                curAtk+=a;
+                curHp+=h;
+                if(curHp>max) curHp=max;
+            }
+        }
+
+        return true;
+    }
+}
