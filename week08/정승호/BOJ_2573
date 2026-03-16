@@ -1,0 +1,104 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    static int n,m;
+    static int[][] curMap;
+    static int[][] nextMap;
+    static boolean[][] visited;
+    static int[] dx = {-1, 1, 0, 0};
+    static int[] dy = {0, 0,-1, 1};
+
+
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+
+        curMap = new int[n][m];
+        nextMap = new int[n][m];
+        visited = new boolean[n][m];
+
+        for (int i = 0; i < n; i++) {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < m; j++){
+                curMap[i][j] = Integer.parseInt(st.nextToken());
+            }
+        }
+
+        // 바깥쪽 루프를 한번 돌려야할 듯?
+        boolean isAllMelted = false;
+        int cntLoop = 0;
+
+        while (!isAllMelted) {
+            boolean isMelted = false;
+            isAllMelted = true;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    if (curMap[i][j] != 0 && !visited[i][j]) {
+                        if (isMelted) {
+                            System.out.println(cntLoop);
+                            return;
+                        }
+                        startMelting(i, j);
+                        isMelted = true;
+                        isAllMelted = false;
+                    }
+                }
+            }
+            curMap = nextMap;
+            visited = new boolean[n][m];
+            nextMap = new int[n][m];
+            cntLoop++;
+        }
+
+        System.out.println(0);
+    }
+
+    private static void startMelting(int x, int y) {
+        Queue<int[]> q = new ArrayDeque<>();
+        visited[x][y] = true;
+        int cnt0 = 0;
+        for (int D = 0; D < 4; D++) {
+            int nx1 = x + dx[D];
+            int ny1 = y + dy[D];
+            if (nx1 >= 0 && ny1 >= 0 && nx1 < n && ny1 < m && curMap[nx1][ny1] == 0) {
+                cnt0++;
+            }
+        }
+        nextMap[x][y] = curMap[x][y] - cnt0;
+        if(nextMap[x][y] < 0) nextMap[x][y] = 0;
+        q.add(new int[]{x, y});
+
+        while (!q.isEmpty()) {
+            int[] cur = q.poll();
+
+            int curX = cur[0];
+            int curY = cur[1];
+
+            for (int d = 0; d < 4; d++) {
+                int nx = curX + dx[d];
+                int ny = curY + dy[d];
+
+                if (nx >= 0 && ny >= 0 && nx < n && ny < m && !visited[nx][ny] && curMap[nx][ny] !=0) {
+                    visited[nx][ny] = true;
+                    cnt0 = 0;
+                    for (int D = 0; D < 4; D++) {
+                        int nx1 = nx + dx[D];
+                        int ny1 = ny + dy[D];
+                        if (nx1 >= 0 && ny1 >= 0 && nx1 < n && ny1 < m && curMap[nx1][ny1] == 0) {
+                            cnt0++;
+                        }
+                    }
+                    nextMap[nx][ny] = curMap[nx][ny] - cnt0;
+                    if(nextMap[nx][ny] < 0) nextMap[nx][ny] = 0;
+                    q.offer(new int[]{nx, ny});
+                }
+            }
+        }
+    }
+}
